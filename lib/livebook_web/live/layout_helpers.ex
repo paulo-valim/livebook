@@ -15,18 +15,20 @@ defmodule LivebookWeb.LayoutHelpers do
 
     ~H"""
     <div class="flex grow h-full">
-      <.live_region role="alert" />
-      <.sidebar
-        socket={@socket}
-        current_page={@current_page}
-        current_user={@current_user}
-        saved_hubs={@saved_hubs}
-      />
+      <div class="absolute sm:static h-full z-[600] sm:z-[500]">
+        <.live_region role="alert" />
+        <.sidebar
+          socket={@socket}
+          current_page={@current_page}
+          current_user={@current_user}
+          saved_hubs={@saved_hubs}
+        />
+      </div>
       <div class="grow overflow-y-auto">
         <div class="flex sm:hidden items-center justify-between sticky sm:pt-1 px-2 top-0 left-0 right-0 z-[500] bg-white border-b border-gray-200">
           <.topbar_sidebar_toggle />
           <div
-            class="hidden items-center justify-end p-2 text-gray-400 hover:text-gray-600 focus:text-gray-600"
+            class="items-center justify-end p-2 text-gray-400 hover:text-gray-600 focus:text-gray-600"
             data-el-toggle-sidebar
           >
             <% # TODO: Use render_slot(@topbar_action) || default() on LiveView 0.18 %>
@@ -52,6 +54,7 @@ defmodule LivebookWeb.LayoutHelpers do
     ~H"""
     <div class="my-2 text-2xl text-gray-400 hover:text-gray-600 focus:text-gray-600 rounded-xl h-10 w-10 flex items-center justify-center">
       <button
+        class="hidden ml-[28rem]"
         aria-label="hide sidebar"
         data-el-toggle-sidebar
         phx-click={
@@ -62,7 +65,6 @@ defmodule LivebookWeb.LayoutHelpers do
         <.remix_icon icon="menu-fold-line" />
       </button>
       <button
-        class="hidden"
         aria-label="show sidebar"
         data-el-toggle-sidebar
         phx-click={
@@ -79,7 +81,7 @@ defmodule LivebookWeb.LayoutHelpers do
   defp sidebar(assigns) do
     ~H"""
     <nav
-      class="min-w-[14rem] h-full z-[500] sm:relative py-1 sm:py-7 bg-gray-900"
+      class="hidden min-w-[14rem] h-full z-[500] sm:relative py-1 sm:py-7 bg-gray-900"
       aria-label="sidebar"
       data-el-sidebar
     >
